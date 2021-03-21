@@ -29,12 +29,13 @@
       var clock = new THREE.Clock();
       var theta = 0;
       var delta = 0;
+      const center = new THREE.Vector3(0, 0, 0);
 
       animate();
 
       function animate() {
         requestAnimationFrame(animate);
-        sinusoidalZoom();
+        verticalCenterSpin();
         renderer.render(scene, camera);
       }
 
@@ -42,6 +43,22 @@
         delta = clock.getDelta();
         theta += delta * 0.2;
         camera.position.z = Math.abs(20*Math.sin(theta))+1;
+      }
+
+      function horizontalCenterSpin() {
+        camera.lookAt(center);
+        delta = clock.getDelta();
+        theta += delta * 0.2;
+        camera.position.z = 10 * Math.sin(theta);
+        camera.position.x = 10 * Math.cos(theta);
+      }
+
+      function verticalCenterSpin() {
+        camera.lookAt(center);
+        delta = clock.getDelta();
+        theta += delta * 0.2;
+        camera.position.z = 10 * Math.sin(theta);
+        camera.position.y = 10 * Math.cos(theta);
       }
 
     </script>
