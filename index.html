@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My first three.js app</title>
+    <style>
+      body { margin: 0; }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      import * as THREE from "/node_modules/three/build/three.module.js";
+      // always need scene, camera and renderer
+      //
+      const scene = new THREE.Scene();  
+      const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 ); 
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize( window.innerWidth, window.innerHeight );  // is innerWidth + innerHeight the equivalent of width and height in p5?
+
+      document.body.appendChild(renderer.domElement);
+
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshBasicMaterial({color: 0x6EA2E8});
+      const cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
+
+      camera.position.z = 5;
+
+      var clock = new THREE.Clock();
+      var theta = 0;
+      var delta = 0;
+
+      animate();
+
+      function animate() {
+        requestAnimationFrame(animate);
+        sinusoidalZoom();
+        renderer.render(scene, camera);
+      }
+
+      function sinusoidalZoom() {
+        delta = clock.getDelta();
+        theta += delta * 0.2;
+        camera.position.z = Math.abs(20*Math.sin(theta))+1;
+      }
+
+    </script>
+  </body>
+</html>
