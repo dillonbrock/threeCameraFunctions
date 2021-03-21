@@ -20,9 +20,11 @@
       document.body.appendChild(renderer.domElement);
 
       const geometry = new THREE.BoxGeometry();
+      const edges = new THREE.EdgesGeometry(geometry);
+      const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({color: 0x000000}));
       const material = new THREE.MeshBasicMaterial({color: 0x6EA2E8});
       const cube = new THREE.Mesh(geometry, material);
-      scene.add(cube);
+      scene.add(line, cube);
 
       camera.position.z = 5;
 
@@ -35,7 +37,7 @@
 
       function animate() {
         requestAnimationFrame(animate);
-        verticalCenterSpin();
+        horizontalCenterSpin();
         renderer.render(scene, camera);
       }
 
