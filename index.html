@@ -37,30 +37,29 @@
 
       function animate() {
         requestAnimationFrame(animate);
-        horizontalCenterSpin();
         renderer.render(scene, camera);
       }
 
-      function sinusoidalZoom() {
+      function sinusoidalZoom(max, min) {
         delta = clock.getDelta();
         theta += delta * 0.2;
-        camera.position.z = Math.abs(20*Math.sin(theta))+1;
+        camera.position.z = Math.abs((max-min)*Math.sin(theta))+min;
       }
 
-      function horizontalCenterSpin() {
+      function horizontalCenterSpin(radius) {
         camera.lookAt(center);
         delta = clock.getDelta();
         theta += delta * 0.2;
-        camera.position.z = 10 * Math.sin(theta);
-        camera.position.x = 10 * Math.cos(theta);
+        camera.position.z = radius * Math.sin(theta);
+        camera.position.x = radius * Math.cos(theta);
       }
 
-      function verticalCenterSpin() {
+      function verticalCenterSpin(radius) {
         camera.lookAt(center);
         delta = clock.getDelta();
         theta += delta * 0.2;
-        camera.position.z = 10 * Math.sin(theta);
-        camera.position.y = 10 * Math.cos(theta);
+        camera.position.z = radius * Math.sin(theta);
+        camera.position.y = radius * Math.cos(theta);
       }
 
     </script>
