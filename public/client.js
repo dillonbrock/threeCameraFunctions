@@ -40,7 +40,7 @@ lines[1].position.x = 2;
 
 var clock = new THREE.Clock();
 var theta = 0;
-var phi = 3*Math.PI/4;
+var phi = 0;
 var delta = 0;
 const center = new THREE.Vector3(0, 0, 0);
 
@@ -121,19 +121,22 @@ function verticalWipe(distance) {
 
 // functions for displaying multiple objects
 function figureEight() {
-  if (phi < 5*Math.PI/4) {
-    phi += 0.002;
-  }
-  else {
-    phi = 3*Math.PI/4;
-  }
-  camera.lookAt(-2, 0, 0);
+  // if (phi < 5*Math.PI/4) {
+  //   phi += 0.002;
+  // }
+  // else {
+  //   phi = 3*Math.PI/4;
+  // }
+  phi += 0.002;
+
+  camera.lookAt(-1, 0, 0);
 
   var x = 10*Math.cos(phi)/(1 + Math.pow(Math.sin(phi), 2));
   var y = (10*Math.cos(phi)*Math.sin(phi))/(1 + Math.pow(Math.sin(phi), 2));
 
   camera.position.x = x;
   camera.position.y = y;
+
 }
 
 
