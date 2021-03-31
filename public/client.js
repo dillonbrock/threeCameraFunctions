@@ -7,7 +7,7 @@ const width = 1;
 const height = 1;
 const depth = 1;
 const objNum = 2;
-      
+
 // always need scene, camera and renderer
 const scene = new THREE.Scene();  
 const camera = new THREE.PerspectiveCamera( fov, window.innerWidth / window.innerHeight, 0.1, 1000 ); 
@@ -16,28 +16,20 @@ renderer.setSize( window.innerWidth, window.innerHeight );  // is innerWidth + i
 
 document.body.appendChild(renderer.domElement);
 
-var geometries - 
 
 var geometries = [];
-geometries.push(new THREE.BoxGeometry(width, height, depth));
-geometries.push(new THREE.BoxGeometry(width, height, depth));
-
 var edges = [];
-edges.push(new THREE.EdgesGeometry(geometries[0]));
-edges.push(new THREE.EdgesGeometry(geometries[1]));
-
 var lines = [];
-lines.push(new THREE.LineSegments(edges[0], new THREE.LineBasicMaterial({color: 0x000000})));
-lines.push(new THREE.LineSegments(edges[1], new THREE.LineBasicMaterial({color: 0x000000})));
-
 const material = new THREE.MeshBasicMaterial({color: 0x6EA2E8});
-
 var cubes = [];
-cubes.push(new THREE.Mesh(geometries[0], material));
-cubes.push(new THREE.Mesh(geometries[1], material));
 
-scene.add(lines[0], cubes[0]);
-scene.add(lines[1], cubes[1]);
+for (let i = 0; i < objNum; i++) {
+  geometries.push(new THREE.BoxGeometry(width, height, depth));
+  edges.push(new THREE.EdgesGeometry(geometries[i]));
+  lines.push(new THREE.LineSegments(edges[i], new THREE.LineBasicMaterial({color: 0x000000})));
+  cubes.push(new THREE.Mesh(geometries[i], material));
+  scene.add(lines[i], cubes[i]);
+}
 
 cubes[0].position.x = -2;
 lines[0].position.x = -2;
@@ -45,27 +37,6 @@ cubes[1].position.x = 2;
 lines[1].position.x = 2;
 
 
-// const geometry1 = new THREE.BoxGeometry(width, height, depth);
-// const edges1 = new THREE.EdgesGeometry(geometry1);
-// const line1 = new THREE.LineSegments(edges1, new THREE.LineBasicMaterial({color: 0x000000}));
-// const material1 = new THREE.MeshBasicMaterial({color: 0x6EA2E8});
-// const cube1 = new THREE.Mesh(geometry1, material1);
-// scene.add(line1, cube1);
-
-
-// // //cube 2
-// const geometry2 = new THREE.BoxGeometry(width, height, depth);
-// const edges2 = new THREE.EdgesGeometry(geometry2);
-// const line2 = new THREE.LineSegments(edges2, new THREE.LineBasicMaterial({color: 0x000000}));
-// const material2 = new THREE.MeshBasicMaterial({color: 0x6EA2E8});
-// const cube2 = new THREE.Mesh(geometry2, material2);
-// scene.add(line2, cube2)
-
-//  camera.position.x = 0;
-//  cube1.position.x = 2;
-//  line1.position.x = 2;
-//  cube2.position.x = -2;
-//  line2.position.x = -2;
 
 var clock = new THREE.Clock();
 var theta = 0;
@@ -148,3 +119,7 @@ function verticalWipe(distance) {
 
 
 // functions for displaying multiple objects
+
+
+
+
